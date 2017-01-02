@@ -5,3 +5,4 @@ PORT = 6667
 PASS = passFile.read()
 NICK = "roreobot"
 CHANNEL = "alfalfadil"
+RATE = (0.667)
