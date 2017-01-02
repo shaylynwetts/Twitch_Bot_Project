@@ -4,44 +4,41 @@ import socket
 import string
 
 def openSocket():
-    s = socket.socket()
-    s.connect((HOST, PORT))
-    s.send("PASS " + PASS + "\r\n")
-    s.send("NICK " + NICK + "\r\n")
-    s.send("JOIN #" + CHANNEL + "\r\n")
-    return s
+    sock = socket.socket()
+    sock.connect((HOST, PORT))
+    sock.send("PASS " + PASS + "\r\n")
+    sock.send("NICK " + NICK + "\r\n")
+    sock.send("JOIN #" + CHANNEL + "\r\n")
+    return sock
 
-def sendMessage(s, message):
+def sendMessage(sock, message):
     messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
-    s.send(messageTemp + "\r\n")
+    sock.send(messageTemp + "\r\n")
     print("Sent: " + messageTemp)
 
-def joinRoom(s):
+def joinRoom(sock):
     readBuffer = ""
     loading = True
     while loading:
-        readBuffer = readBuffer + s.recv(1024)
-        temp = string.split(readBuffer, "\n")
-        readBuffer = temp.pop()
+        readLine = sock.recv(1024).decode("utf-8")
 
-        for line in temp:
-            print(line)
-            loading = loadingComplete(line)
+        print(readLine)
+        loading = loadingComplete(readLine)
         
-    sendMessage(s, "Succesfully joined chat")
+    sendMessage(sock, "Succesfully joined chat")
 
-def loadingComplete(line):
-    if("End of /NAMES list" in line):
+def loadingComplete(readLine):
+    if("End of /NAMES list" in readLine):
         return False
     else:
         return True
 
-def getUser(line):
-    separate = line.split(":", 2)
-    user = separate[1].split("!", 1)[0]
-    return user
+def getUsername(readLine):
+    parts = readLine.split(":", 2)
+    username = parts[1].split("!", 1)[0]
+    return username
 
-def getMessage(line):
-    separate = line.split(":", 2)
-    message = separate[2]
+def getMessage(readLine):
+    parts = readLine.split(":", 2)
+    message = parts[2]
     return message

@@ -1,41 +1,43 @@
 #==============================================================================
-# TODO: make a new file for general functions
+# TODO: comments; top comments and general comments
 #
 # TODO: general functions list
 #	- parse for language for timing out
 #	- basic input output commands & cycle them output
 #		* links
 #		* commission info & availability
-#		* drawing program
+#		* drawing programs
 #		* tablet
+#		* requests info
 #	- chat log
 #	- loyalty (revlo type functionality)
 #	- song requests
 #	- links to other streamers
 #	- uptime
+#	- request stream functionality (gotta determine how to go about this)
 #
-# TODO: comments
 #==============================================================================
 from Setup import *
+#from Functions import *
 from Configure import RATE
 
 import string
 import time
 
-s = openSocket()
-joinRoom(s)
+sock = openSocket()
+joinRoom(sock)
 
 while True:
-	line = s.recv(1024).decode("utf-8")
+	readLine = sock.recv(1024).decode("utf-8")
 
-	if line == "PING :tmi.twitch.tv\r\n":
+	if readLine == "PING :tmi.twitch.tv\r\n":
 		print("PINGed")
-		s.send("PONG :tmi.twitch.tv\r\n")
+		sock.send("PONG :tmi.twitch.tv\r\n")
 		print("PONGed\n")
 	else:
-		user = getUser(line)
-		message = getMessage(line)
-		print(user + ": " + message)
+		username = getUsername(readLine)
+		message = getMessage(readLine)
+		print(username + ": " + message)
 
 	time.sleep(1 / RATE)
 #==============================================================================
