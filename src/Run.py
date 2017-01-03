@@ -18,7 +18,7 @@
 #
 #==============================================================================
 from Setup import *
-#from Functions import *
+from Functions import *
 from Configure import RATE
 
 import string
@@ -38,6 +38,8 @@ while True:
 		username = getUsername(readLine)
 		message = getMessage(readLine)
 		print(username + ": " + message)
+		if message == "!links\r\n":
+			printLinks(sock)
 
 	time.sleep(1 / RATE)
 #==============================================================================
