@@ -13,7 +13,8 @@ import socket
 import string
 
 #==============================================================================
-#
+# openSocket: opens a socket connection between the bot and Twitch chat using
+#             the auth code, bot username, and channel username
 #==============================================================================
 def openSocket():
     sock = socket.socket()
@@ -24,7 +25,8 @@ def openSocket():
     return sock
 
 #==============================================================================
-#
+# sendMessage: sends a message from the bot to the connected Twitch chat
+#              as well as outputs the message to the terminal
 #==============================================================================
 def sendMessage(sock, message):
     messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
@@ -32,7 +34,8 @@ def sendMessage(sock, message):
     print("ROREOBOT sent: " + messageTemp)
 
 #==============================================================================
-#
+# joinRoom: bot reads in all info from Twitch chat as it connects and sends
+#           a message to the chat once finished
 #==============================================================================
 def joinRoom(sock):
     readBuffer = ""
@@ -46,7 +49,8 @@ def joinRoom(sock):
     sendMessage(sock, "CoolCat CoolCat")
 
 #==============================================================================
-#
+# loadingComplete: determines the end of info read in from Twitch chat
+#                  as the bot connects
 #==============================================================================
 def loadingComplete(readLine):
     if("End of /NAMES list" in readLine):
@@ -55,7 +59,8 @@ def loadingComplete(readLine):
         return True
 
 #==============================================================================
-#
+# getUsername: splits the username of a chat user from the rest of the
+#              information read in by the bot
 #==============================================================================
 def getUsername(readLine):
     parts = readLine.split(":", 2)
@@ -63,7 +68,8 @@ def getUsername(readLine):
     return username
 
 #==============================================================================
-#
+# getMessage: splits the message of a chat user from the rest of the
+#             information read in by the bot
 #==============================================================================
 def getMessage(readLine):
     parts = readLine.split(":", 2)

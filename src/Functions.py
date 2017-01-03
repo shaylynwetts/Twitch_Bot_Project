@@ -24,7 +24,8 @@ from Setup import sendMessage
 #                              pages
 #==============================================================================
 def printLinks(sock):
-	twitterLink = "https://twitter.com/alfalfadil"
-	tumblrLink = "https://alfalfadil.tumblr.com"
-	message = "Twitter @ " + twitterLink + "; Tumblr @ " + tumblrLink
-	sendMessage(sock, message)
+    twitterLink = "https://twitter.com/alfalfadil"
+    tumblrLink = "https://alfalfadil.tumblr.com"
+    message = "Twitter @ " + twitterLink + "; Tumblr @ " + tumblrLink
+    sendMessage(sock, message)
+    
