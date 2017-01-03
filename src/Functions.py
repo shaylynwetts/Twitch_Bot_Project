@@ -7,9 +7,6 @@
 #                chat
 #
 # TODO:
-# def printLinks():
-#
-# def printCommissionInfo():
 #
 # def printRequestInfo():
 #
@@ -28,4 +25,22 @@ def printLinks(sock):
     twitterLink = "https://twitter.com/alfalfadil"
     tumblrLink = "https://alfalfadil.tumblr.com"
     message = "✖ LINKS ✖ Twitter @ " + twitterLink + " ✖ Tumblr @ " + tumblrLink
+    sendMessage(sock, message)
+
+#==============================================================================
+# printCommissionInfo (command !commissions): prints link to main commission
+#                                             info page on Tumblr
+#==============================================================================
+def printCommissionInfo(sock):
+    commissionLink = "http://alfalfadil.tumblr.com/post/147679795591/commission-info"
+    message = "✖ COMMISSIONS ✖ " + commissionLink
+    sendMessage(sock, message)
+
+#==============================================================================
+# printRequestInfo (command !requests): prints link to requests info when that
+#                                       is finished
+#==============================================================================
+def printRequestInfo(sock):
+    requstsLink = "No Request Info Yet"
+    message = "✖ REQUESTS ✖ " + requstsLink
     sendMessage(sock, message)

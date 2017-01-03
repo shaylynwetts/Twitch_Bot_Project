@@ -51,6 +51,12 @@ def main():
 
             if message == "!links\r\n":
                 printLinks(sock)
+            elif message == "!commissions\r\n":
+                printCommissionInfo(sock)
+            elif message == "!requests\r\n":
+                printRequestInfo(sock)
+            else:
+                pass
 
         time.sleep(1 / RATE)
 
@@ -59,9 +65,12 @@ def main():
 #==============================================================================
 def outputCycle():
     while True:
-        time.sleep(2 * 60)
+        time.sleep(5 * 60)
         printLinks(sock)
-
+        time.sleep(5 * 60)
+        printCommissionInfo(sock)
+        time.sleep(5 * 60)
+        printRequestInfo(sock)
 
 #==============================================================================
 # runs multiple threads so reading in from the chat does not affect cycling
