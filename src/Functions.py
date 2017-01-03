@@ -1,3 +1,4 @@
+# coding: utf-8
 #==============================================================================
 # Author       : Shaylyn Wetts
 # Last Edited  : 01/02/17
@@ -26,6 +27,5 @@ from Setup import sendMessage
 def printLinks(sock):
     twitterLink = "https://twitter.com/alfalfadil"
     tumblrLink = "https://alfalfadil.tumblr.com"
-    message = "Twitter @ " + twitterLink + "; Tumblr @ " + tumblrLink
+    message = "✖ LINKS ✖ Twitter @ " + twitterLink + " ✖ Tumblr @ " + tumblrLink
     sendMessage(sock, message)
-    
