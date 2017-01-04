@@ -8,11 +8,6 @@
 #
 # TODO:
 #
-# def printRequestInfo():
-#
-# def printSoftware():
-#
-# def printHardware():
 #==============================================================================
 from Setup import sendMessage
 
@@ -24,7 +19,7 @@ from Setup import sendMessage
 def printLinks(sock):
     twitterLink = "https://twitter.com/alfalfadil"
     tumblrLink = "https://alfalfadil.tumblr.com"
-    message = "✖ LINKS ✖ Twitter @ " + twitterLink + " ✖ Tumblr @ " + tumblrLink
+    message = "✖ LINKS ✖ twitter @ " + twitterLink + " ✖ tumblr @ " + tumblrLink
     sendMessage(sock, message)
 
 #==============================================================================
@@ -43,4 +38,22 @@ def printCommissionInfo(sock):
 def printRequestInfo(sock):
     requstsLink = "No Request Info Yet"
     message = "✖ REQUESTS ✖ " + requstsLink
+    sendMessage(sock, message)
+
+#==============================================================================
+# printSoftware (command !software): prints information on software being
+#                                    used for the stream
+#==============================================================================
+def printSoftware(sock):
+    softwareInfo = "drawing program: Paint Tool SAI ✖ stream client: OBS"
+    message = "✖ SOFTWARE ✖ " + softwareInfo
+    sendMessage(sock, message)
+
+#==============================================================================
+# printHardware (command !hardware): prints information on hardware being
+#                                    used for the stream
+#==============================================================================
+def printHardware(sock):
+    hardwareInfo = "tablet: Wacom Cintiq 22HD"
+    message = "✖ HARDWARE ✖ " + hardwareInfo
     sendMessage(sock, message)

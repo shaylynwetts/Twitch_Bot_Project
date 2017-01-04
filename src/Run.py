@@ -8,11 +8,6 @@
 #
 # TODO: general functions list
 #   - parse for language for timing out
-#   - basic input output commands & cycle them output
-#       * commission info & availability
-#       * drawing programs
-#       * tablet
-#       * requests info
 #   - chat log
 #   - loyalty (revlo type functionality)
 #   - song requests
@@ -55,6 +50,10 @@ def main():
                 printCommissionInfo(sock)
             elif message == "!requests\r\n":
                 printRequestInfo(sock)
+            elif message == "!software\r\n":
+                printSoftware(sock)
+            elif message == "!hardware\r\n":
+                printHardware(sock)
             else:
                 pass
 
@@ -71,6 +70,10 @@ def outputCycle():
         printCommissionInfo(sock)
         time.sleep(5 * 60)
         printRequestInfo(sock)
+        time.sleep(5 * 60)
+        printSoftware(sock)
+        time.sleep(5 * 60)
+        printHardware(sock)
 
 #==============================================================================
 # runs multiple threads so reading in from the chat does not affect cycling
