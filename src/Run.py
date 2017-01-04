@@ -14,6 +14,7 @@
 #   - links to other streamers
 #   - uptime
 #   - request stream functionality (gotta determine how to go about this)
+#       - store requests in a persistent file with username and message
 #
 #==============================================================================
 from Setup import *

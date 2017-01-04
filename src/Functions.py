@@ -7,10 +7,9 @@
 #                chat
 #
 # TODO:
-#
+#   * continue implementing languageMod function
 #==============================================================================
 from Setup import sendMessage
-
 
 #==============================================================================
 # printLinks (command !links): prints links to social media and professional
@@ -56,4 +55,29 @@ def printSoftware(sock):
 def printHardware(sock):
     hardwareInfo = "tablet: Wacom Cintiq 22HD"
     message = "✖ HARDWARE ✖ " + hardwareInfo
+    sendMessage(sock, message)
+
+#==============================================================================
+# languageMod: searches a message sent from chat for banned words and issues
+#              timeouts accordingly
+#==============================================================================
+#def languageMod(sock, user, originalMessage):
+#    bannedWords = [
+#
+#    ]
+
+#==============================================================================
+# banUser: bans a user
+#==============================================================================
+def banUser(sock, user):
+    banMessage = ".ban "
+    message = banMessage + user
+    sendMessage(sock, message)
+
+#==============================================================================
+# timeoutUser: timeouts a user
+#==============================================================================
+def timeoutUser(sock, user):
+    timeoutMessage = ".timeout "
+    message = timeoutMessage + user
     sendMessage(sock, message)
