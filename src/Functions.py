@@ -67,7 +67,8 @@ def printHardware(sock):
 #    ]
 
 #==============================================================================
-# banUser: bans a user
+# banUser: bans a user; bans can only be issued through whisper by specified
+#          user
 #==============================================================================
 def banUser(sock, user):
     banMessage = ".ban "
@@ -75,7 +76,7 @@ def banUser(sock, user):
     sendMessage(sock, message)
 
 #==============================================================================
-# timeoutUser: timeouts a user
+# timeoutUser: timeouts a user; done in response to the language mod
 #==============================================================================
 def timeoutUser(sock, user):
     timeoutMessage = ".timeout "

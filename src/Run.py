@@ -27,6 +27,7 @@ import threading
 
 sock = openSocket()
 joinRoom(sock)
+sock.send("CAP REQ :twitch.tv/commands\r\n") # allows bot to receive whispers
 
 #==============================================================================
 # main: reads in messages and commands from chat users and returns a PONG
@@ -43,7 +44,8 @@ def main():
         else:
             username = getUsername(readLine)
             message = getMessage(readLine)
-            print(username + ": " + message)
+            messageType = getMessageType(readLine)
+            print("( " + messageType + " ) " + username + ": " + message)
 
             if message == "!links\r\n":
                 printLinks(sock)

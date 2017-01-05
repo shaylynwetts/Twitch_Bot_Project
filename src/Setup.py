@@ -70,9 +70,27 @@ def getUsername(readLine):
 
 #==============================================================================
 # getMessage: splits the message of a chat user from the rest of the
-#             information read in by the bot
+#             information read in by the bot.  Handles receive messages that
+#             do not contain a message part
 #==============================================================================
 def getMessage(readLine):
     parts = readLine.split(":", 2)
-    message = parts[2]
+    numParts = len(parts)
+    if numParts != 3:
+        message = " "
+    else:
+        message = parts[2]
     return message
+
+#==============================================================================
+# getMessageType: determines whether a message is a regular message from
+#                 a user in chat (PRIVMSG) or a whisper (WHISPER)
+#==============================================================================
+def getMessageType(readLine):
+    parts = readLine.split()
+    messageType = ""
+    if "WHISPER" in parts:
+        messageType = "WHISPER"
+    if "PRIVMSG" in parts:
+        messageType = "PRIVMSG"
+    return messageType
