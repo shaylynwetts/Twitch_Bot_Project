@@ -1,13 +1,12 @@
 # coding: utf-8
 #==============================================================================
 # Author       : Shaylyn Wetts
-# Last Edited  : 01/02/17
+# Last Edited  : 01/05/17
 #
 # Run.py       : Opens the socket connection and joins the Twitch chat
 #                specified in Configure.py.  Uses multithreading
 #
 # TODO: general functions list
-#   - parse for language for timing out
 #   - chat log
 #   - loyalty (revlo type functionality)
 #   - song requests
@@ -31,7 +30,8 @@ sock.send("CAP REQ :twitch.tv/commands\r\n") # allows bot to receive whispers
 
 #==============================================================================
 # main: reads in messages and commands from chat users and returns a PONG
-#       when PINGed by Twitch
+#       when PINGed by Twitch; contains a specific set of requirements to
+#       invoke the banUser() function
 #==============================================================================
 def main():
     while True:
@@ -46,6 +46,7 @@ def main():
             message = getMessage(readLine)
             messageType = getMessageType(readLine)
             print("( " + messageType + " ) " + username + ": " + message)
+            languageMod(sock, username, message)
 
             if message == "!links\r\n":
                 printLinks(sock)
@@ -59,6 +60,18 @@ def main():
                 printHardware(sock)
             else:
                 pass
+
+            if messageType == "WHISPER":
+                if username == "alfalfadil":
+                    parts = message.split()
+                    numParts = len(parts)
+                    if numParts == 2:
+                        if parts[0] == "!ban":
+                            print("Banning user: " + parts[1])
+                            banUser(sock, parts[1])
+                        if parts[0] == "!timeout":
+                            print("Timing out user: " + parts[1])
+                            timeoutUser(sock, parts[1])
 
         time.sleep(1 / RATE)
 

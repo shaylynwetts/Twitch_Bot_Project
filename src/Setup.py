@@ -1,7 +1,7 @@
 # coding: utf-8
 #==============================================================================
 # Author       : Shaylyn Wetts
-# Last Edited  : 01/02/17
+# Last Edited  : 01/05/17
 #
 # Setup.py     : Contains functions for connecting to Twitch as well as the
 #                basic functions for sending and interpreting messages read

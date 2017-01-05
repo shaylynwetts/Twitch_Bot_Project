@@ -1,7 +1,7 @@
 # coding: utf-8
 #==============================================================================
 # Author       : Shaylyn Wetts
-# Last Edited  : 01/02/17
+# Last Edited  : 01/05/17
 #
 # Functions.py : Contain functions that can be called by user input to the
 #                chat
@@ -61,14 +61,19 @@ def printHardware(sock):
 # languageMod: searches a message sent from chat for banned words and issues
 #              timeouts accordingly
 #==============================================================================
-#def languageMod(sock, user, originalMessage):
-#    bannedWords = [
-#
-#    ]
+def languageMod(sock, user, originalMessage):
+    bannedWords = [
+        "cuckold"
+    ]
+
+    for word in bannedWords:
+        if word in originalMessage:
+            print(user + " has been timed out due to language.")
+            timeoutUser(sock, user)
 
 #==============================================================================
-# banUser: bans a user; bans can only be issued through whisper by specified
-#          user
+# banUser (!ban username): bans a user; bans can only be issued through
+#                          whisper by specified user
 #==============================================================================
 def banUser(sock, user):
     banMessage = ".ban "
@@ -76,7 +81,9 @@ def banUser(sock, user):
     sendMessage(sock, message)
 
 #==============================================================================
-# timeoutUser: timeouts a user; done in response to the language mod
+# timeoutUser (!timeout username): timeouts a user; done in response to the
+#                                  language mod or through whisper by specified
+#                                  user
 #==============================================================================
 def timeoutUser(sock, user):
     timeoutMessage = ".timeout "

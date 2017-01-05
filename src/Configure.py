@@ -1,7 +1,7 @@
 # coding: utf-8
 #==============================================================================
 # Author       : Shaylyn Wetts
-# Last Edited  : 01/02/17
+# Last Edited  : 01/05/17
 #
 # Configure.py : Contains basic information for connecting to Twitch
 #                
