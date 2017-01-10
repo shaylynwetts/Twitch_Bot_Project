@@ -7,7 +7,7 @@
 #                chat
 #
 # TODO:
-#   * continue implementing languageMod function
+#
 #==============================================================================
 from Setup import sendMessage
 
@@ -15,47 +15,52 @@ from Setup import sendMessage
 # printLinks (command !links): prints links to social media and professional
 #                              pages
 #==============================================================================
-def printLinks(sock):
+def printLinks(sock, currentLog):
     twitterLink = "https://twitter.com/alfalfadil"
     tumblrLink = "https://alfalfadil.tumblr.com"
-    message = "✖ LINKS ✖ twitter @ " + twitterLink + " ✖ tumblr @ " + tumblrLink
+    message = "✖ LINKS ✖ twitter @ " + twitterLink + " ✖ tumblr @ " + tumblrLink + "\r\n"
     sendMessage(sock, message)
+    chatLog(currentLog, "roreoBOT", message, "PRIVMSG")
 
 #==============================================================================
 # printCommissionInfo (command !commissions): prints link to main commission
 #                                             info page on Tumblr
 #==============================================================================
-def printCommissionInfo(sock):
+def printCommissionInfo(sock, currentLog):
     commissionLink = "http://alfalfadil.tumblr.com/post/147679795591/commission-info"
-    message = "✖ COMMISSIONS ✖ " + commissionLink
+    message = "✖ COMMISSIONS ✖ " + commissionLink + "\r\n"
     sendMessage(sock, message)
+    chatLog(currentLog, "roreoBOT", message, "PRIVMSG")
 
 #==============================================================================
 # printRequestInfo (command !requests): prints link to requests info when that
 #                                       is finished
 #==============================================================================
-def printRequestInfo(sock):
+def printRequestInfo(sock, currentLog):
     requstsLink = "No Request Info Yet"
-    message = "✖ REQUESTS ✖ " + requstsLink
+    message = "✖ REQUESTS ✖ " + requstsLink + "\r\n"
     sendMessage(sock, message)
+    chatLog(currentLog, "roreoBOT", message, "PRIVMSG")
 
 #==============================================================================
 # printSoftware (command !software): prints information on software being
 #                                    used for the stream
 #==============================================================================
-def printSoftware(sock):
+def printSoftware(sock, currentLog):
     softwareInfo = "drawing program: Paint Tool SAI ✖ stream client: OBS"
-    message = "✖ SOFTWARE ✖ " + softwareInfo
+    message = "✖ SOFTWARE ✖ " + softwareInfo + "\r\n"
     sendMessage(sock, message)
+    chatLog(currentLog, "roreoBOT", message, "PRIVMSG")
 
 #==============================================================================
 # printHardware (command !hardware): prints information on hardware being
 #                                    used for the stream
 #==============================================================================
-def printHardware(sock):
+def printHardware(sock, currentLog):
     hardwareInfo = "tablet: Wacom Cintiq 22HD"
-    message = "✖ HARDWARE ✖ " + hardwareInfo
+    message = "✖ HARDWARE ✖ " + hardwareInfo + "\r\n"
     sendMessage(sock, message)
+    chatLog(currentLog, "roreoBOT", message, "PRIVMSG")
 
 #==============================================================================
 # languageMod: searches a message sent from chat for banned words and issues
@@ -89,3 +94,11 @@ def timeoutUser(sock, user):
     timeoutMessage = ".timeout "
     message = timeoutMessage + user
     sendMessage(sock, message)
+
+#==============================================================================
+# chatLog: keeps a running log of all chat messages, including those
+#          sent by roreoBOT.  File is stored in the logs directory
+#==============================================================================
+def chatLog(currentLog, username, message, messageType):
+    currentLog = open(currentLog, "a")
+    currentLog.write("( " + messageType + " ) " + username + ": " + message)

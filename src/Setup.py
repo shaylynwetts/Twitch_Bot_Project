@@ -12,6 +12,8 @@ from Configure import *
 
 import socket
 import string
+import time
+import os
 
 #==============================================================================
 # openSocket: opens a socket connection between the bot and Twitch chat using
@@ -32,14 +34,12 @@ def openSocket():
 def sendMessage(sock, message):
     messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
     sock.send(messageTemp + "\r\n")
-    print("ROREOBOT sent: " + messageTemp)
 
 #==============================================================================
 # joinRoom: bot reads in all info from Twitch chat as it connects and sends
 #           a message to the chat once finished
 #==============================================================================
 def joinRoom(sock):
-    readBuffer = ""
     loading = True
     while loading:
         readLine = sock.recv(1024).decode("utf-8")
@@ -58,6 +58,19 @@ def loadingComplete(readLine):
         return False
     else:
         return True
+
+#==============================================================================
+# createChatLogFile: creates a new file in the logs directory with the name
+#                    Stream Log <current date> <current time>
+#==============================================================================
+def createChatLogFile():
+    fileDate = time.strftime("%m_%d_%Y")
+    fileTime = time.strftime("%H_%M")
+    fileName = "Stream Log " + fileDate + " " + fileTime + ".txt"
+    directoryPath = os.path.dirname(os.path.realpath(__file__)) + "/logs"
+    filePath = os.path.join(directoryPath, fileName)
+    logFile = open(filePath, "w")
+    return filePath
 
 #==============================================================================
 # getUsername: splits the username of a chat user from the rest of the

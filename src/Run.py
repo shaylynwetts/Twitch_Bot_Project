@@ -7,13 +7,13 @@
 #                specified in Configure.py.  Uses multithreading
 #
 # TODO: general functions list
-#   - chat log
 #   - loyalty (revlo type functionality)
 #   - song requests
 #   - links to other streamers
 #   - uptime
 #   - request stream functionality (gotta determine how to go about this)
 #       - store requests in a persistent file with username and message
+#       - request stream mode must be active for requests to be taken
 #
 #==============================================================================
 from Setup import *
@@ -26,6 +26,7 @@ import threading
 
 sock = openSocket()
 joinRoom(sock)
+logFile = createChatLogFile()
 sock.send("CAP REQ :twitch.tv/commands\r\n") # allows bot to receive whispers
 
 #==============================================================================
@@ -46,18 +47,19 @@ def main():
             message = getMessage(readLine)
             messageType = getMessageType(readLine)
             print("( " + messageType + " ) " + username + ": " + message)
+            chatLog(logFile, username, message, messageType)
             languageMod(sock, username, message)
 
             if message == "!links\r\n":
-                printLinks(sock)
+                printLinks(sock, logFile)
             elif message == "!commissions\r\n":
-                printCommissionInfo(sock)
+                printCommissionInfo(sock, logFile)
             elif message == "!requests\r\n":
-                printRequestInfo(sock)
+                printRequestInfo(sock, logFile)
             elif message == "!software\r\n":
-                printSoftware(sock)
+                printSoftware(sock, logFile)
             elif message == "!hardware\r\n":
-                printHardware(sock)
+                printHardware(sock, logFile)
             else:
                 pass
 
@@ -67,10 +69,14 @@ def main():
                     numParts = len(parts)
                     if numParts == 2:
                         if parts[0] == "!ban":
-                            print("Banning user: " + parts[1])
+                            banMessage = "Banning user: " + parts[1] + "\r\n"
+                            print(banMessage)
+                            chatLog(logFile, "roreoBOT", banMessage, "CONSOLE OUTPUT")
                             banUser(sock, parts[1])
                         if parts[0] == "!timeout":
-                            print("Timing out user: " + parts[1])
+                            timeoutMessage = "Timing out user: " + parts[1] + "\r\n"
+                            print(timeoutMessage)
+                            chatLog(logFile, "roreoBOT", timeoutMessage, "CONSOLE OUTPUT")
                             timeoutUser(sock, parts[1])
 
         time.sleep(1 / RATE)
