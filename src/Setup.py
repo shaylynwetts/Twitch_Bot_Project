@@ -72,6 +72,10 @@ def createChatLogFile():
     logFile = open(filePath, "w")
     return filePath
 
+def readInBannedWords():
+    with open("bannedWords.txt") as readFile:
+        bannedWords = readFile.read().splitlines()
+    return bannedWords
 #==============================================================================
 # getUsername: splits the username of a chat user from the rest of the
 #              information read in by the bot

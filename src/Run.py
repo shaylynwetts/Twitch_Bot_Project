@@ -27,6 +27,9 @@ import threading
 sock = openSocket()
 joinRoom(sock)
 logFile = createChatLogFile()
+bannedWords = readInBannedWords()
+for word in bannedWords:
+    print(word)
 sock.send("CAP REQ :twitch.tv/commands\r\n") # allows bot to receive whispers
 
 #==============================================================================
@@ -48,7 +51,7 @@ def main():
             messageType = getMessageType(readLine)
             print("( " + messageType + " ) " + username + ": " + message)
             chatLog(logFile, username, message, messageType)
-            languageMod(sock, username, message)
+            languageMod(sock, username, message, bannedWords)
 
             if message == "!links\r\n":
                 printLinks(sock, logFile)

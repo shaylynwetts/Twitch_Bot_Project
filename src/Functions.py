@@ -7,7 +7,8 @@
 #                chat
 #
 # TODO:
-#
+#   - uptime
+#   - link to other streamers
 #==============================================================================
 from Setup import sendMessage
 
@@ -63,13 +64,23 @@ def printHardware(sock, currentLog):
     chatLog(currentLog, "roreoBOT", message, "PRIVMSG")
 
 #==============================================================================
+# uptime (command !uptime):
+#==============================================================================
+#def uptime(sock, currentLog):
+
+
+#==============================================================================
+# printHardware (command !streamer username): prints a link to the channel
+#                                             of specified streamer; can only
+#                                             be done by moderators
+#==============================================================================
+#def printStreamerLink(sock, username, currentLog):
+
+#==============================================================================
 # languageMod: searches a message sent from chat for banned words and issues
 #              timeouts accordingly
 #==============================================================================
-def languageMod(sock, user, originalMessage):
-    bannedWords = [
-        "cuckold"
-    ]
+def languageMod(sock, user, originalMessage, bannedWords):
 
     for word in bannedWords:
         if word in originalMessage:

@@ -1,3 +1,4 @@
 *.pyc
 oauthToken.txt
 src/logs
+bannedWords.txt

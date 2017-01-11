@@ -7,7 +7,7 @@
 #                
 #==============================================================================
 
-passFile = open('oauthToken.txt', 'r') # contains authentication token for bot
+passFile = open("oauthToken.txt", "r") # contains authentication token for bot
                                        # account
 HOST = "irc.twitch.tv"                 # host ID
 PORT = 6667                            # port
